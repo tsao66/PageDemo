@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>展示網頁 - Vue.js RWD</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 導航列 -->
+        <nav class="navbar" :class="{ 'scrolled': isScrolled }">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>{{ siteName }}</h2>
+                </div>
+                <ul class="nav-menu" :class="{ 'active': isMobileMenuOpen }">
+                    <li><a href="#home" @click="scrollTo('home')">首頁</a></li>
+                    <li><a href="#about" @click="scrollTo('about')">關於</a></li>
+                    <li><a href="#services" @click="scrollTo('services')">服務</a></li>
+                    <li><a href="#contact" @click="scrollTo('contact')">聯絡</a></li>
+                </ul>
+                <div class="hamburger" :class="{ 'active': isMobileMenuOpen }" @click="toggleMobileMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 首頁區塊 -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">{{ heroTitle }}</h1>
+                <p class="hero-subtitle">{{ heroSubtitle }}</p>
+                <button class="cta-button" @click="scrollTo('about')">了解更多</button>
+            </div>
+        </section>
+
+        <!-- 關於區塊 -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">關於我們</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>{{ aboutText }}</p>
+                    </div>
+                    <div class="about-image">
+                        <div class="image-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 服務區塊 -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">我們的服務</h2>
+                <div class="services-grid">
+                    <div v-for="service in services" :key="service.id" class="service-card" @click="selectService(service)">
+                        <div class="service-icon">{{ service.icon }}</div>
+                        <h3>{{ service.title }}</h3>
+                        <p>{{ service.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 聯絡區塊 -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">聯絡我們</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h4>📧 Email</h4>
+                            <p>{{ contactInfo.email }}</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>📞 電話</h4>
+                            <p>{{ contactInfo.phone }}</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>📍 地址</h4>
+                            <p>{{ contactInfo.address }}</p>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form @submit.prevent="submitForm">
+                            <input v-model="form.name" type="text" placeholder="姓名" required>
+                            <input v-model="form.email" type="email" placeholder="Email" required>
+                            <textarea v-model="form.message" placeholder="訊息" required></textarea>
+                            <button type="submit">送出訊息</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 頁腳 -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 {{ siteName }}. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
