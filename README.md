@@ -9,7 +9,7 @@
 - 表單驗證
 
 ## 線上展示
-[點此查看網站](https://tsao66.github.io/project)
+[點此查看網站](https://tsao66.github.io/PageDemo)
 
 ## 本地運行
 直接用瀏覽器打開 index.html 即可
